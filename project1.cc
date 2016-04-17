@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#include "gameOfLife.h"
+
 using std::cin;
 using std::cout;
 using std::endl;
@@ -22,7 +24,7 @@ int main()
 
   // Modified based on project4.cc originially written by
   // Russell C. Bjork
-  
+
   do
   {
     cin >> command;
@@ -38,7 +40,9 @@ int main()
       x = activeCols;
       y = activeRows;
       cout << "Table made with width:" << x << " and height:" << y << endl;
-      //TODO add theBoard::createBoard(x,y);
+
+
+
       break;
 
     case 'C':
@@ -68,6 +72,21 @@ int main()
 
   cout << "Current Value | Width:" << x << " Height:" << y << endl;
 
+  board theBoard(x,y);
+
+
+  // cout << "Board empty :" << theBoard << endl;
+
+  // do {
+  //   //display board uncluding gen number
+  //
+  //   //option to quit
+  //
+  //   //enter cycles
+  //
+  //
+  //   /* code */
+  // } while(/* condition */);
 
   // do {
   //   cin >> command;

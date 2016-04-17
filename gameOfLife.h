@@ -1,9 +1,9 @@
-class gameOfLife {
-public:
+#include "board.h"
 
-}
+class gameOfLife
+{
+  public:
 
-class Board {
-public:
 
-}
+
+};
