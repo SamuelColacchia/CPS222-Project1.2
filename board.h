@@ -1,19 +1,35 @@
+#include <iostream>
+#include <string>
+#include <vector>
 
+using std::cout;
+using std::endl;
+using std::vector;
 
 class board
 {
 public:
-    board(int x, int y);
+        board(int x, int y);
+
+
 private:
         enum Organism
         {
-                NONE, GESTATING, LIVING, DYING, BORDER
+                NONE,
+                GESTATING,
+                LIVING,
+                DYING,
+                BORDER
         };
 
+public:
+        void createBoard();
+        void printBoard();
 
 
 private:
+        int _col;
+        int _row;
         int _generation;
-        Organism _board;
-
+        vector < vector<Organism> > _board;
 };

@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+
 
 #include "gameOfLife.h"
 
@@ -73,6 +72,8 @@ int main()
   cout << "Current Value | Width:" << x << " Height:" << y << endl;
 
   board theBoard(x,y);
+
+  theBoard.printBoard();
 
 
   // cout << "Board empty :" << theBoard << endl;
