@@ -3,7 +3,9 @@
 class gameOfLife
 {
   public:
-
+    gameOfLife();
+  public:
+    void clearBoard();
 
 
 };

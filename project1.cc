@@ -1,5 +1,3 @@
-
-
 #include "gameOfLife.h"
 
 using std::cin;
@@ -13,11 +11,16 @@ static const int activeCols = 50;
 int main()
 {
   cout << "The Game of Life" << endl;
+  gameOfLife theGameOfLife();
+
+  gameOfLife().clearBoard();
 
   char command;
 
   int x;
   int y;
+
+  int startingOrganisms;
 
   cout << "Use D(efault) or C(ustom), for the grid size or Q(uit)." << endl;
 
@@ -27,6 +30,9 @@ int main()
   do
   {
     cin >> command;
+    while (cin.get() != '\n')
+    {
+    }
     if (cin.eof())
     {
       command = 'Q';
@@ -39,9 +45,6 @@ int main()
       x = activeCols;
       y = activeRows;
       cout << "Table made with width:" << x << " and height:" << y << endl;
-
-
-
       break;
 
     case 'C':
@@ -52,6 +55,7 @@ int main()
       cout << "Height:";
       cin >> y;
       cin.ignore(10000, '\n');
+      break;
 
     case 'Q':
     case 'q':
@@ -62,19 +66,87 @@ int main()
       while (cin.get() != '\n')
       {
       }
-
-      cout << string( 100, '\n');
-
       cout << "Valid commands are:" << endl << "D(efault) or C(ustom), for the grid size or Q(uit)." << endl;
     }
   } while (command != 'Q' && command != 'q' && command != 'C' && command != 'c' && command != 'D' && command != 'd');
 
-  cout << "Current Value | Width:" << x << " Height:" << y << endl;
+  board theBoard(x, y);
 
-  board theBoard(x,y);
 
-  theBoard.printBoard();
+  cout << "S(et) number of starting living organism or Q(uit) or B(egin) simulation." << endl;
 
+  do
+  {
+    cin >> command;
+    while (cin.get() != '\n')
+    {
+    }
+    if (cin.eof())
+    {
+      command = 'Q';
+    }
+    switch (command)
+    {
+    case 'Q':
+    case 'q':
+      cout << "Finished" << endl;
+      break;
+
+    case 'S':
+    case 's':
+    theBoard.clearScreen();
+      cout << "Number of Organisms:" << endl;
+      cin >> startingOrganisms;
+      while (cin.get() != '\n')
+      {
+      }
+      for (int i = 0; i < startingOrganisms; i++)
+      {
+        cout << "Organism left to set:" << startingOrganisms - i << endl;
+        cout << "(X Y)" << endl;
+        cin >> x;
+        cin >> y;
+
+        cout << "x:" << x << " y:" << y << endl;
+        theBoard.setStartingOrganism(x, y);
+        cout << "" << endl;
+      }
+      break;
+    case 'B':
+    case 'b':
+      cout << "Simulation starting." << endl;
+      break;
+    case 'P':
+    case 'p':
+      theBoard.printBoard();
+      break;
+    default:
+      cout << "Valid commands: B(egin) simulation, S(et) the starting organisms, P(rint the current board)" << endl;
+      break;
+    }
+  } while (command != 'Q' && command != 'q' && command != 'B' && command != 'b');
+
+  if ((command == 'b') || (command == 'B'))
+  {
+    cout << "ENTER to increase generations, Q(uit)." << endl;
+    do
+    {
+      command = cin.get();
+      switch (command) {
+        case '\n':
+          theBoard.printBoard();
+          break;
+        case 'Q':
+        case 'q':
+          cout << "Program quitting." << endl;
+          break;
+        default:
+          cout << "Valid Commands: Q(uit), ENTER to increase generations" << endl;
+          break;
+
+      }
+    } while (command != 'Q' && command != 'q');
+  }
 
   // cout << "Board empty :" << theBoard << endl;
 
