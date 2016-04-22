@@ -18,13 +18,19 @@ void board::clearScreen()
   system("clear");
 }
 
+
 void board::printBoard()
 {
-  for (int top = 0; top < _col + 2; top++)
-  {
-    cout << (char)_hr;
-  }
+  cout << "Current Generation:" << _generation << endl;
   cout << endl;
+  cout << (char)_corner;
+  for (int top = 0; top < _col; top++)
+  {
+    cout << (char)_topBottom;
+  }
+  cout << (char)_corner;
+  cout << endl;
+
   for (int row = 0; row < _row; row++)
   {
     cout << "|";
@@ -45,4 +51,44 @@ void board::printBoard()
     }
     cout << "|" << endl;
   }
+  cout << (char)_corner;
+  for (int top = 0; top < _col; top++)
+  {
+    cout << (char)_topBottom;
+  }
+  cout << (char)_corner;
+  cout << endl;
+}
+
+
+void board::cycle()
+{
+  vector < vector <Organism> >::iterator x;
+  vector <Organism>::iterator y;
+  for (x = _board.begin(); x != _board.end(); ++x)
+  {
+    for (y = x->begin(); y != x->end(); ++y)
+    {
+      cout << *y;
+    }
+    cout << endl;
+  }
+}
+
+
+int board::countOrganisms(int cRow, int cCol)
+{
+  int neighborcount = 0;
+
+  for (int x = -1; x < 2; x++)
+  {
+    for (int y = -1; y < 2; y++)
+    {
+      if ((_board[cRow + x][cCol + y] == LIVING) || (_board[cRow + x][cCol + y] == DYING))
+      {
+        neighborcount++;
+      }
+    }
+  }
+  return neighborcount;
 }

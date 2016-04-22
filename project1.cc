@@ -94,7 +94,7 @@ int main()
 
     case 'S':
     case 's':
-    theBoard.clearScreen();
+      theBoard.clearScreen();
       cout << "Number of Organisms:" << endl;
       cin >> startingOrganisms;
       while (cin.get() != '\n')
@@ -111,39 +111,48 @@ int main()
         theBoard.setStartingOrganism(x, y);
         cout << "" << endl;
       }
+      cout << "B(egin) simulation, S(et) more organisms, P(rint) the current board, Q(uit) program." << endl;
       break;
+
     case 'B':
     case 'b':
       cout << "Simulation starting." << endl;
       break;
+
     case 'P':
     case 'p':
-      theBoard.printBoard();
+      theBoard.clearScreen();
+      theBoard.cycle();
+      // theBoard.printBoard();
       break;
+
     default:
-      cout << "Valid commands: B(egin) simulation, S(et) the starting organisms, P(rint the current board)" << endl;
+      cout << "Valid commands: B(egin) simulation, S(et) the starting organisms, P(rint) the current board, Q(uit) program." << endl;
       break;
     }
   } while (command != 'Q' && command != 'q' && command != 'B' && command != 'b');
 
   if ((command == 'b') || (command == 'B'))
   {
+    theBoard.clearScreen();
     cout << "ENTER to increase generations, Q(uit)." << endl;
     do
     {
       command = cin.get();
-      switch (command) {
-        case '\n':
-          theBoard.printBoard();
-          break;
-        case 'Q':
-        case 'q':
-          cout << "Program quitting." << endl;
-          break;
-        default:
-          cout << "Valid Commands: Q(uit), ENTER to increase generations" << endl;
-          break;
+      switch (command)
+      {
+      case '\n':
+        theBoard.printBoard();
+        break;
 
+      case 'Q':
+      case 'q':
+        cout << "Program quitting." << endl;
+        break;
+
+      default:
+        cout << "Valid Commands: Q(uit), ENTER to increase generations" << endl;
+        break;
       }
     } while (command != 'Q' && command != 'q');
   }
