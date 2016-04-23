@@ -158,7 +158,7 @@ int main()
   *
   * ENTER : Clear the screen cycle the board, then show the board
   *
-  * Q : Quit the program and return to the prompt 
+  * Q : Quit the program and return to the prompt
   */
 
 
@@ -189,35 +189,4 @@ int main()
       }
     } while (command != 'Q' && command != 'q');
   }
-
-  // cout << "Board empty :" << theBoard << endl;
-
-  // do {
-  //   //display board uncluding gen number
-  //
-  //   //option to quit
-  //
-  //   //enter cycles
-  //
-  //
-  //   /* code */
-  // } while(/* condition */);
-
-  // do {
-  //   cin >> command;
-  //   if (cin.eof()) command = 'Q';
-  //
-  //   switch (command) {
-  //     case
-  //   }
-
-
-
-  /* code */
 }
-
-
-// while (command != 'Q' && command != 'q')
-// {
-// }
-// }
