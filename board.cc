@@ -63,15 +63,60 @@ void board::printBoard()
 
 void board::cycle()
 {
-  vector < vector <Organism> >::iterator x;
-  vector <Organism>::iterator y;
-  for (x = _board.begin(); x != _board.end(); ++x)
+  int posX = 0;
+  int posY = 0;
+
+  vector<vector<Organism> >::iterator x;
+  vector<Organism>::iterator y;
+  for (x = _board.begin() + 1; x != _board.end() - 1; ++x)
   {
-    for (y = x->begin(); y != x->end(); ++y)
+    posX = (x - _board.begin());
+    for (y = x->begin() + 1; y != x->end() - 1; ++y)
     {
-      cout << *y;
+      posY = (y - x->begin());
+      //cout << countOrganisms(posX, posY) << ":";
+      if ((*y == NONE) && (countOrganisms(posX, posY) == 3))
+      {
+        //set to grow
+        //cout << "grow at X:" << posX << " Y:" << posY << endl;
+        *y = GESTATING;
+      }
+      else if ((*y == LIVING) && (countOrganisms(posX, posY) < 2))
+      {
+        //set to dieing
+        //cout << "die due to lonely at X:" << posX << " Y:" << posY << endl;
+        *y = DYING;
+      }
+      else if ((*y == LIVING) && (countOrganisms(posX, posY) >= 4))
+      {
+        //set to dieing
+        //cout << "die due to crowding at X:" << posX << " Y:" << posY << endl;
+        *y = DYING;
+      }
     }
     cout << endl;
+  }
+  _generation++;
+}
+
+
+void board::cleanup()
+{
+  vector<vector<Organism> >::iterator x;
+  vector<Organism>::iterator y;
+  for (x = _board.begin() + 1; x != _board.end() - 1; ++x)
+  {
+    for (y = x->begin() + 1; y != x->end() - 1; ++y)
+    {
+      if (*y == GESTATING)
+      {
+        *y = LIVING;
+      }
+      else if (*y == DYING)
+      {
+        *y = NONE;
+      }
+    }
   }
 }
 
@@ -84,8 +129,13 @@ int board::countOrganisms(int cRow, int cCol)
   {
     for (int y = -1; y < 2; y++)
     {
+      // cout << "x:" << x << " y:" << y << endl;
       if ((_board[cRow + x][cCol + y] == LIVING) || (_board[cRow + x][cCol + y] == DYING))
       {
+        if (x == 0 && y == 0)
+        {
+          continue;
+        }
         neighborcount++;
       }
     }

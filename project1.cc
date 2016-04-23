@@ -11,9 +11,6 @@ static const int activeCols = 50;
 int main()
 {
   cout << "The Game of Life" << endl;
-  gameOfLife theGameOfLife();
-
-  gameOfLife().clearBoard();
 
   char command;
 
@@ -122,8 +119,7 @@ int main()
     case 'P':
     case 'p':
       theBoard.clearScreen();
-      theBoard.cycle();
-      // theBoard.printBoard();
+      theBoard.printBoard();
       break;
 
     default:
@@ -134,7 +130,7 @@ int main()
 
   if ((command == 'b') || (command == 'B'))
   {
-    theBoard.clearScreen();
+    theBoard.printBoard();
     cout << "ENTER to increase generations, Q(uit)." << endl;
     do
     {
@@ -142,6 +138,9 @@ int main()
       switch (command)
       {
       case '\n':
+        theBoard.clearScreen();
+        theBoard.cycle();
+        theBoard.cleanup();
         theBoard.printBoard();
         break;
 

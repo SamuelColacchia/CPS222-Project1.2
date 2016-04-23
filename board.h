@@ -3,7 +3,7 @@
 #include <vector>
 #include <stdlib.h>
 
-using std::string;
+
 using std::cout;
 using std::endl;
 using std::vector;
@@ -43,11 +43,12 @@ public:
         void clearScreen();
         void cycle();
         int countOrganisms(int cRow, int cCol);
+        void cleanup();
 
 private:
         int _col;
         int _row;
         int _generation;
-  
+
         vector < vector<Organism> > _board;
 };
