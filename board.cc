@@ -15,7 +15,8 @@ void board::setStartingOrganism(int x, int y)
 void board::clearScreen()
 {
   system("cls");
-  system("clear");
+  system("CLEAR");
+  system("reset");
 }
 
 

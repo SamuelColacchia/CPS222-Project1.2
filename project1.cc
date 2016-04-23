@@ -24,6 +24,17 @@ int main()
   // Modified based on project4.cc originially written by
   // Russell C. Bjork
 
+/*
+* Set board parameter loop
+*
+* Command
+*
+* D : Load default paramters for width and height as specified by project 1
+*
+* C : Set custom width and height for the game board
+*
+* Q : Quit the program and return to the prompt
+*/
   do
   {
     cin >> command;
@@ -69,6 +80,20 @@ int main()
 
   board theBoard(x, y);
 
+
+  /*
+  * Set initial organisms on the board
+  *
+  * Command
+  *
+  * S : given a number for the start organisms and set there x:y positions
+  *
+  * B : begin the simulation and allow the program to start looping
+  *
+  * Q : Quit the program and return to the prompt
+  *
+  * P : print the current board
+  */
 
   cout << "S(et) number of starting living organism or Q(uit) or B(egin) simulation." << endl;
 
@@ -127,6 +152,15 @@ int main()
       break;
     }
   } while (command != 'Q' && command != 'q' && command != 'B' && command != 'b');
+
+  /*
+  * Main loop call
+  *
+  * ENTER : Clear the screen cycle the board, then show the board
+  *
+  * Q : Quit the program and return to the prompt 
+  */
+
 
   if ((command == 'b') || (command == 'B'))
   {
