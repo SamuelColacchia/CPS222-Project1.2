@@ -1,23 +1,57 @@
 #include "board.h"
 
+/**
+ * Board constructor
+ *
+ * @param int x : the x distance for the board
+ * @param int y : the y distance for the board
+ *
+ * _generation : a varialbe to keep track of the generations
+ * _col : a varialbe to record the distance in the x direction
+ * _row : a variable to record the distance in the y direction
+ * _board : the board object that contains the organisms
+ *
+ */
+
 board::board(int x, int y)
   : _generation(0), _col(x), _row(y), _board(y, vector<Organism> (x, NONE))
 {
 }
 
 
+//TODO add @description
+
+/**
+ * Set the starting organisms
+ *
+ * @param int x : the x position for a starting organisms
+ * @param int y : the y position for a starting organisms
+ *
+ */
 void board::setStartingOrganism(int x, int y)
 {
   _board[x][y] = LIVING;
 }
 
 
+//TODO add @description
+
+/**
+ *  Attempt to clear the screen
+ */
 void board::clearScreen()
 {
   system("CLEAR");
 }
 
 
+//TODO add @description
+
+/**
+ * Print the Board
+ *
+ * Takes the _board and loops through it printing based on organsim's status
+ */
 void board::printBoard()
 {
   cout << "Current Generation:" << _generation << endl;
@@ -60,6 +94,14 @@ void board::printBoard()
 }
 
 
+//TODO add @description
+
+/**
+ * Complete one cycle through the board
+ *
+ * Based on the rules of game of life evaluates the board.
+ *
+ */
 void board::cycle()
 {
   int posX = 0;
@@ -73,23 +115,16 @@ void board::cycle()
     for (y = x->begin() + 1; y != x->end() - 1; ++y)
     {
       posY = (y - x->begin());
-      //cout << countOrganisms(posX, posY) << ":";
       if ((*y == NONE) && (countOrganisms(posX, posY) == 3))
       {
-        //set to grow
-        //cout << "grow at X:" << posX << " Y:" << posY << endl;
         *y = GESTATING;
       }
       else if ((*y == LIVING) && (countOrganisms(posX, posY) < 2))
       {
-        //set to dieing
-        //cout << "die due to lonely at X:" << posX << " Y:" << posY << endl;
         *y = DYING;
       }
       else if ((*y == LIVING) && (countOrganisms(posX, posY) >= 4))
       {
-        //set to dieing
-        //cout << "die due to crowding at X:" << posX << " Y:" << posY << endl;
         *y = DYING;
       }
     }
@@ -99,6 +134,14 @@ void board::cycle()
 }
 
 
+//TODO add @description
+
+/**
+ * Cleanup the board based on a cycle
+ *
+ * Cleans up the dying and gestistating organisms setting them to there final status before we
+ * end this generation
+ */
 void board::cleanup()
 {
   vector<vector<Organism> >::iterator x;
@@ -120,6 +163,16 @@ void board::cleanup()
 }
 
 
+/**
+ * Count neighbot organsisms
+ *
+ * @param int cRow : the current x position of the organisms to count around
+ * @param int cCol : the current y position of the orgnaism to count around
+ *
+ * @description : given a organisms positions counts the living organisms around it.
+ * Counts a square 1 block around the current block, while not counting the current
+ * organisms.
+ */
 int board::countOrganisms(int cRow, int cCol)
 {
   int neighborcount = 0;
@@ -128,10 +181,9 @@ int board::countOrganisms(int cRow, int cCol)
   {
     for (int y = -1; y < 2; y++)
     {
-      // cout << "x:" << x << " y:" << y << endl;
       if ((_board[cRow + x][cCol + y] == LIVING) || (_board[cRow + x][cCol + y] == DYING))
       {
-        if (x == 0 && y == 0)
+        if ((x == 0) && (y == 0))
         {
           continue;
         }

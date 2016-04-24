@@ -50,5 +50,5 @@ private:
         int _row;
         int _generation;
 
-        vector < vector<Organism> > _board;
+        vector < vector<Organism>> _board;
 };
