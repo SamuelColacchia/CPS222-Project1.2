@@ -7,7 +7,7 @@ using std::string;
 
 static const int activeRows = 18;
 static const int activeCols = 50;
-bool simpleprogram = true;
+bool simpleprogram = false;
 int startingOrganisms;
 int x;
 int y;
@@ -169,7 +169,7 @@ int main()
     if ((command == 'b') || (command == 'B'))
     {
       theBoard.printBoard();
-      cout << "ENTER to increase generations, Q(uit)." << endl;
+      cout << "ENTER to increase generations, Q(uit), I(ncrease) number of generations by X." << endl;
       do
       {
         command = cin.get();
@@ -187,8 +187,21 @@ int main()
           cout << "Program quitting." << endl;
           break;
 
+        case 'I':
+        case 'i':
+          cout << "Increase the generation by X" << endl;
+          cin >> numOfGenrations;
+          for (int g = 0; numOfGenrations > g; g++)
+          {
+            theBoard.cycle();
+            theBoard.cleanup();
+          }
+          theBoard.clearScreen();
+          theBoard.printBoard();
+          break;
+
         default:
-          cout << "Valid Commands: Q(uit), ENTER to increase generations" << endl;
+          cout << "Valid Commands: Q(uit), ENTER to increase generations, I(ncrease) generation number by X" << endl;
           break;
         }
       } while (command != 'Q' && command != 'q');
