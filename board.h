@@ -44,11 +44,12 @@ public:
         void cycle();
         int countOrganisms(int cRow, int cCol);
         void cleanup();
+        void createBoarder();
 
 private:
         int _col;
         int _row;
         int _generation;
 
-        vector < vector<Organism>> _board;
+        vector < vector<Organism > > _board;
 };

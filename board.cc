@@ -44,6 +44,38 @@ void board::clearScreen()
   system("CLEAR");
 }
 
+void board::createBoarder()
+{
+  int posX = 0;
+  int posY = 0;
+
+  vector<vector<Organism> >::iterator x;
+  vector<Organism>::iterator y;
+  for (x = _board.begin(); x != _board.end(); ++x)
+  {
+    for (y = x->begin(); y != x->end(); ++y)
+    {
+      if (x == _board.begin())
+      {
+        *y = BORDER;
+      }
+      if (x == _board.end() - 1)
+      {
+        *y = BORDER;
+      }
+      if ( y == x->begin())
+      {
+        *y = BORDER;
+      }
+      if ( y == x->end() - 1)
+      {
+        *y = BORDER;
+      }
+    }
+  }
+
+}
+
 
 //TODO add @description
 
